@@ -27,10 +27,10 @@ Please check this [official documentation](https://podman.io/getting-started/ins
     yum install podman
 
 ## Container setup
-In Linux terminal, download and run **alpine Linux** from docker library:
+In Linux terminal, download and run [**alpine Linux**](https://alpinelinux.org/) from docker library:
 	
 	podman pull docker.io/library/alpine
-	podman run --name node-1 -h node-1 -dt  docker.io/library/debian 
+	podman run --name node-1 -h node-1 -dt  docker.io/library/alpine
 
 it will create a container with name **node-1** and hostname **node-1**.
 |       |note                      |
