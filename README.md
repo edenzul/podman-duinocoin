@@ -1,10 +1,16 @@
 # Welcome to Podman-DuinoCoin 
 This is guideline to run **DuinoCoin** inside a container by podman
 
+**DuinoCoins** is belongs to [DuinoCoins Team](https://duinocoin.com/team).
+Check their works in this [DuinoCoins-GitHub](https://github.com/revoxhere/duino-coin) link.
+
+
 # Getting started
 ## LINUX Host
 LINUX installation (any distro) is required to host container.
 Install podman and its dependencies.
+
+Please check this [official documentation](https://podman.io/getting-started/installation) about podman installation.
 
 ### Debian, Ubuntu and similar distros
 
