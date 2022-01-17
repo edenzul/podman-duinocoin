@@ -1,0 +1,166 @@
+[root@banana ~]# podman image list
+REPOSITORY                TAG         IMAGE ID      CREATED       SIZE
+docker.io/library/alpine  latest      c059bfaa849c  7 weeks ago   5.87 MB
+[root@banana ~]# podman run --name node-x -h node-x -dt docker.io/library/alpine
+8b1b382a5f85735375a0862397e126af10f81de877a28894bf3b29620e122513
+[root@banana ~]# podman attach node-x
+/ # hostname 
+node-x
+/ # ping yahoo.com
+PING yahoo.com (74.6.143.25): 56 data bytes
+64 bytes from 74.6.143.25: seq=0 ttl=45 time=228.829 ms
+^C
+--- yahoo.com ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max = 228.829/228.829/228.829 ms
+/ # apk update
+fetch https://dl-cdn.alpinelinux.org/alpine/v3.15/main/x86_64/APKINDEX.tar.gz
+fetch https://dl-cdn.alpinelinux.org/alpine/v3.15/community/x86_64/APKINDEX.tar.gz
+v3.15.0-203-g4e030c18bb [https://dl-cdn.alpinelinux.org/alpine/v3.15/main]
+v3.15.0-201-gebdb376712 [https://dl-cdn.alpinelinux.org/alpine/v3.15/community]
+OK: 15847 distinct packages available
+/ # apk add python3 git
+(1/19) Installing ca-certificates (20191127-r7)
+(2/19) Installing brotli-libs (1.0.9-r5)
+(3/19) Installing nghttp2-libs (1.46.0-r0)
+(4/19) Installing libcurl (7.80.0-r0)
+(5/19) Installing expat (2.4.3-r0)
+(6/19) Installing pcre2 (10.39-r0)
+(7/19) Installing git (2.34.1-r0)
+(8/19) Installing libbz2 (1.0.8-r1)
+(9/19) Installing libffi (3.4.2-r1)
+(10/19) Installing gdbm (1.22-r0)
+(11/19) Installing xz-libs (5.2.5-r0)
+(12/19) Installing libgcc (10.3.1_git20211027-r0)
+(13/19) Installing libstdc++ (10.3.1_git20211027-r0)
+(14/19) Installing mpdecimal (2.5.1-r1)
+(15/19) Installing ncurses-terminfo-base (6.3_p20211120-r0)
+(16/19) Installing ncurses-libs (6.3_p20211120-r0)
+(17/19) Installing readline (8.1.1-r0)
+(18/19) Installing sqlite-libs (3.36.0-r0)
+(19/19) Installing python3 (3.9.7-r4)
+Executing busybox-1.34.1-r3.trigger
+Executing ca-certificates-20191127-r7.trigger
+OK: 69 MiB in 33 packages
+/ # mkdir /duino-coin
+/ # git clone https://github.com/revoxhere/duino-coin.git
+Cloning into 'duino-coin'...
+remote: Enumerating objects: 10614, done.
+remote: Counting objects: 100% (268/268), done.
+remote: Compressing objects: 100% (245/245), done.
+remote: Total 10614 (delta 116), reused 30 (delta 19), pack-reused 10346
+Receiving objects: 100% (10614/10614), 43.11 MiB | 6.18 MiB/s, done.
+Resolving deltas: 100% (6270/6270), done.
+/ # cd duino-coin/
+/duino-coin # wget https://bootstrap.pypa.io/get-pip.py
+Connecting to bootstrap.pypa.io (151.101.0.175:443)
+saving to 'get-pip.py'
+get-pip.py           100% |**********************************************| 2108k  0:00:00 ETA
+'get-pip.py' saved
+/duino-coin # python3 get-pip.py 
+Collecting pip
+  Downloading pip-21.3.1-py3-none-any.whl (1.7 MB)
+     |████████████████████████████████| 1.7 MB 1.5 MB/s            
+Collecting setuptools
+  Downloading setuptools-60.5.0-py3-none-any.whl (958 kB)
+     |████████████████████████████████| 958 kB 2.1 MB/s            
+Collecting wheel
+  Downloading wheel-0.37.1-py2.py3-none-any.whl (35 kB)
+Installing collected packages: wheel, setuptools, pip
+Successfully installed pip-21.3.1 setuptools-60.5.0 wheel-0.37.1
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+/duino-coin # pip install requests
+Collecting requests
+  Downloading requests-2.27.1-py2.py3-none-any.whl (63 kB)
+     |████████████████████████████████| 63 kB 74 kB/s             
+Collecting urllib3<1.27,>=1.21.1
+  Downloading urllib3-1.26.8-py2.py3-none-any.whl (138 kB)
+     |████████████████████████████████| 138 kB 1.5 MB/s            
+Collecting charset-normalizer~=2.0.0
+  Downloading charset_normalizer-2.0.10-py3-none-any.whl (39 kB)
+Collecting certifi>=2017.4.17
+  Downloading certifi-2021.10.8-py2.py3-none-any.whl (149 kB)
+     |████████████████████████████████| 149 kB 1.4 MB/s            
+Collecting idna<4,>=2.5
+  Downloading idna-3.3-py3-none-any.whl (61 kB)
+     |████████████████████████████████| 61 kB 2.5 MB/s            
+Installing collected packages: urllib3, idna, charset-normalizer, certifi, requests
+Successfully installed certifi-2021.10.8 charset-normalizer-2.0.10 idna-3.3 requests-2.27.1 urllib3-1.26.8
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+/duino-coin # python3 PC_Miner.py 
+Colorama is not installed. Miner will try to automatically install it If it fails, please manually execute python3 -m pip install colorama
+WARNING: pip is being invoked by an old script wrapper. This will fail in a future version of pip.
+Please see https://github.com/pypa/pip/issues/5599 for advice on fixing the underlying issue.
+To avoid this problem you can invoke Python with '-m pip' instead of running pip directly.
+
+Collecting colorama
+  Downloading colorama-0.4.4-py2.py3-none-any.whl (16 kB)
+Installing collected packages: colorama
+Successfully installed colorama-0.4.4
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+Cpuinfo is not installed. Miner will try to automatically install it If it fails, please manually execute python3 -m pip install py-cpuinfo
+WARNING: pip is being invoked by an old script wrapper. This will fail in a future version of pip.
+Please see https://github.com/pypa/pip/issues/5599 for advice on fixing the underlying issue.
+To avoid this problem you can invoke Python with '-m pip' instead of running pip directly.
+Collecting py-cpuinfo
+  Downloading py-cpuinfo-8.0.0.tar.gz (99 kB)
+     |████████████████████████████████| 99 kB 1.0 MB/s            
+  Preparing metadata (setup.py) ... done
+Building wheels for collected packages: py-cpuinfo
+  Building wheel for py-cpuinfo (setup.py) ... done
+  Created wheel for py-cpuinfo: filename=py_cpuinfo-8.0.0-py3-none-any.whl size=22257 sha256=716e2bc3d72f5578b8089336b549a4bce9514bcc07b9d62fd8319d6789c0b337
+  Stored in directory: /root/.cache/pip/wheels/a9/33/c2/bcf6550ff9c95f699d7b2f261c8520b42b7f7c33b6e6920e29
+Successfully built py-cpuinfo
+Installing collected packages: py-cpuinfo
+Successfully installed py-cpuinfo-8.0.0
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+Pypresence is not installed. Miner will try to automatically install it If it fails, please manually execute python3 -m pip install pypresence
+WARNING: pip is being invoked by an old script wrapper. This will fail in a future version of pip.
+Please see https://github.com/pypa/pip/issues/5599 for advice on fixing the underlying issue.
+To avoid this problem you can invoke Python with '-m pip' instead of running pip directly.
+Collecting pypresence
+  Downloading pypresence-4.2.1-py2.py3-none-any.whl (11 kB)
+Installing collected packages: pypresence
+Successfully installed pypresence-4.2.1
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+Error with lang file, falling back to english: 'NoneType' object has no attribute 'startswith'
+
+Duino-Coin basic configuration tool
+Edit Duino-Coin PC Miner 3.0/Miner_config.cfg file later if you want to change it.
+Don't have an Duino-Coin account yet? Use Wallet to register on server.
+
+Enter your Duino-Coin username: pada1
+Set mining intensity (1-100)% (recommended: 95): 95
+Set mining threads (recommended for your system: 8): 1
+1 - Low difficulty (for Raspberry Pis, older computers)
+2 - Medium difficulty (for typical computers)
+3 - Network difficulty (for powerful computers)
+Select mining difficulty you want to use (1-3): 1
+Do you want to add an identifier (name) to this rig? (y/N): y
+Enter desired rig name: node-x
+Set developer donation level (0-5) (recommended: 1), this will not reduce your earnings: 1
+Config saved! Launching the miner
+
+ ‖ Official Duino-Coin © Python Miner (3.0) 2019-2021
+ ‖ https://github.com/revoxhere/duino-coin
+ ‖ CPU: 1x Intel(R) Xeon(R) CPU E3-1231 v3 @ 3.40GHz
+ ‖ Developer donation level: 1
+ ‖ Algorithm: DUCO-S1 ⚙ Low diff
+ ‖ Rig identifier: node-x
+ ‖ Have a wonderful morning, pada1!
+
+05:45:28  sys0  Downloading fasthash accelerations module
+05:45:36  sys0  Thank You for being an awesome donator ❤️ 
+		Your donation will help us maintain the server and allow further development
+05:45:36  net0  Searching for the fastest node to connect to
+05:45:37  net0  Retrieved mining node: dream-pool-1
+05:45:37  sys0  Mining thread #0 is starting using DUCO-S1 algorithm with 95% efficiency
+
+ctrl+p ctrl+q
+
+[root@banana ~]# podman stop node-x
+node-x
+[root@banana ~]# podman rm node-x 
+8b1b382a5f85735375a0862397e126af10f81de877a28894bf3b29620e122513
+[root@banana ~]# 
+
